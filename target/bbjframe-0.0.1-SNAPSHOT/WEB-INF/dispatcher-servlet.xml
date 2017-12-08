@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<!-- 配置自动扫描的包 -->
+	<context:component-scan base-package="com.bbj"></context:component-scan>
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="com.bbj.controller.base.responseconverter.BBJMappingJackson2HttpMessageConverter">
+			</bean>
+		</mvc:message-converters>
+		<mvc:return-value-handlers>
+			<bean
+				class="com.bbj.controller.base.responseconverter.BBJRequestResponseBodyMethodProcessor">
+			</bean>
+		</mvc:return-value-handlers>
+	</mvc:annotation-driven>
+
+	<!-- 返回 jsp <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
+		/> <property name="prefix" value="/WEB-INF/jsp/" /> <property name="suffix" 
+		value=".jsp" /> </bean> -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/html/framework/" />
+		<property name="suffix" value=".html" />
+	</bean>
+	<!--springMVC+thymeleaf的跳转页面配置 -->
+	<!-- <bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver"> 
+		<property name="prefix" value="/WEB-INF/html/framework/" /> <property name="suffix" 
+		value=".html" /> <property name="templateMode" value="HTML5" /> </bean> <bean 
+		id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine"> <property 
+		name="templateResolver" ref="templateResolver" /> </bean> <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver"> 
+		<property name="templateEngine" ref="templateEngine" /> </bean> -->
+
+	<!-- MySQL -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<bean id="jdbctemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- MySQL -->
+
+	<!-- 增加返回JSON格式支持 2017-11-28 by luruihua -->
+	<bean
+		class="com.bbj.controller.base.responseconverter.BBJAnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="bbjMappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean id="bbjMappingJackson2HttpMessageConverter"
+		class="com.bbj.controller.base.responseconverter.BBJMappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="testtest"
+		class="com.bbj.controller.base.responseconverter.BBJRequestResponseBodyMethodProcessor">
+	</bean>
+	<!-- 增加返回JSON格式支持 2017-11-28 by luruihua -->
+
+</beans>
