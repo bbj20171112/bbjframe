@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Widgets示例</title>
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<!-- 引入全局css样式 -->
+<script src="../../resources/framework/css-import.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<h4>渲染出来的，若想绑定事件，参照原来的结构，如：$('#'+id).find('.' + class).on();</h4>
+		<div id="box1"></div>
+		<div id="box2"></div>
+		<h4>原来的结构</h4>
+		<div class="info-box bg-aqua">
+			<span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+			<div class="info-box-content">
+				<span class="info-box-text">origin struct</span> <span
+					class="info-box-number">to fangbian copy code or</span>
+				<div class="progress">
+					<div class="progress-bar" style="width: 70%"></div>
+				</div>
+				<span class="progress-description">if you want to bind some
+					events</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- 引入JavaScripts样式 -->
+	<script src="../../resources/framework/javascript-import.js"></script>
+	<script>
+		/**
+		 * demo
+		 */
+		(function(win, $) {
+			//数据模版
+			var options = {
+				type : 'infobox', //模版名称
+				iconcls : 'fa fa-bookmark-o', //图标
+				text : 'bage', //文本1
+				number : 'ruihua', //文本2
+				progress : [ { //进度条
+					width : '70%', //进度条宽度
+					description : 'luanma' //进度条描述
+				} ]
+			};
+			//渲染
+			bbj.renderHtml('box1', options);
+			options.progress = null;
+			bbj.renderHtml('box2', options);
+		}(this, jQuery));
+	</script>
+</body>
+
+</html>
