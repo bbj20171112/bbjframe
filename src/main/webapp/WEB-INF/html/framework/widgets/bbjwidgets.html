@@ -8,54 +8,321 @@
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
-<!-- 引入全局css样式 -->
-<script src="../../resources/framework/css-import.js"></script>
+<script src="resources/framework/css-import.js"></script>
 </head>
 
 <body>
 	<div class="wrapper">
-		<h4>渲染出来的，若想绑定事件，参照原来的结构，如：$('#'+id).find('.' + class).on();</h4>
-		<div id="box1"></div>
-		<div id="box2"></div>
-		<h4>原来的结构</h4>
-		<div class="info-box bg-aqua">
-			<span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
-			<div class="info-box-content">
-				<span class="info-box-text">origin struct</span> <span
-					class="info-box-number">to fangbian copy code or</span>
-				<div class="progress">
-					<div class="progress-bar" style="width: 70%"></div>
+		<h3>infobox</h3>
+		<div class="row">
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div id="box1"></div>
+			</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div id="box2"></div>
+			</div>
+		</div>
+		<h3>smallbox</h3>
+		<div class="row">
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div id="box3"></div>
+			</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div id="box4"></div>
+			</div>
+		</div>
+		<h3>panelbox</h3>
+		<div class="row">
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div id="box5"></div>
+			</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div id="box6"></div>
+			</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div id="box7"></div>
+			</div>
+		</div>
+		<h3>chatbox</h3>
+		<div class="box box-primary direct-chat direct-chat-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">Direct Chat</h3>
+				<div class="box-tools pull-right">
+					<span data-toggle="tooltip" title="3 New Messages"
+						class="badge bg-light-blue">3</span>
+					<button type="button" class="btn btn-box-tool"
+						data-widget="collapse">
+						<i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool"
+						data-toggle="tooltip" title="Contacts"
+						data-widget="chat-pane-toggle">
+						<i class="fa fa-comments"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove">
+						<i class="fa fa-times"></i>
+					</button>
 				</div>
-				<span class="progress-description">if you want to bind some
-					events</span>
+			</div>
+			<div class="box-body">
+				<div class="direct-chat-messages">
+					<div class="direct-chat-msg">
+						<div class="direct-chat-info clearfix">
+							<span class="direct-chat-name pull-left">Alexander Pierce</span>
+							<span class="direct-chat-timestamp pull-right">23 Jan 2:00
+								pm</span>
+						</div>
+						<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg"
+							alt="Message User Image">
+						<div class="direct-chat-text">Is this template really for
+							free? That's unbelievable!</div>
+					</div>
+					<div class="direct-chat-msg right">
+						<div class="direct-chat-info clearfix">
+							<span class="direct-chat-name pull-right">Sarah Bullock</span> <span
+								class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+						</div>
+						<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg"
+							alt="Message User Image">
+						<div class="direct-chat-text">You better believe it!</div>
+					</div>
+				</div>
+				<div class="direct-chat-contacts">
+					<ul class="contacts-list">
+						<li><a href="#"> <img class="contacts-list-img"
+								src="../dist/img/user1-128x128.jpg" alt="User Image">
+								<div class="contacts-list-info">
+									<span class="contacts-list-name"> Count Dracula <small
+										class="contacts-list-date pull-right">2/28/2015</small>
+									</span> <span class="contacts-list-msg">How have you been? I
+										was...</span>
+								</div>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="box-footer">
+				<form action="#" method="post">
+					<div class="input-group">
+						<input type="text" name="message" placeholder="Type Message ..."
+							class="form-control"> <span class="input-group-btn">
+							<button type="submit" class="btn btn-primary btn-flat">Send</button>
+						</span>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-
-	<!-- 引入JavaScripts样式 -->
-	<script src="../../resources/framework/javascript-import.js"></script>
+	<script src="resources/framework/javascript-import.js"></script>
 	<script>
-		/**
-		 * demo
-		 */
-		(function(win, $) {
-			//数据模版
-			var options = {
-				type : 'infobox', //模版名称
-				iconcls : 'fa fa-bookmark-o', //图标
-				text : 'bage', //文本1
-				number : 'ruihua', //文本2
-				progress : [ { //进度条
-					width : '70%', //进度条宽度
-					description : 'luanma' //进度条描述
-				} ]
-			};
-			//渲染
-			bbj.renderHtml('box1', options);
-			options.progress = null;
-			bbj.renderHtml('box2', options);
-		}(this, jQuery));
-	</script>
+			/**
+			 * infobox
+			 */
+
+			/*<div class="info-box bg-aqua">
+				<span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+				<div class="info-box-content">
+					<span class="info-box-text">Bookmarks</span>
+					<span class="info-box-number">41,410</span>
+					<div class="progress">
+						<div class="progress-bar" style="width: 70%"></div>
+					</div>
+					<span class="progress-description">70% Increase in 30 Days</span>
+				</div>
+			</div>*/
+
+			(function(win, $) {
+				//数据模版
+				var options = {
+					type: 'infobox', //模版名称!!!!!
+					bgcolorcls: 'bg-aqua', //背景
+					iconcls: 'fa fa-bookmark-o', //图标
+					text1: 'text1', //文本1
+					text2: 'text2', //文本2
+					progress: [] //进度条
+				};
+				//渲染box1
+				bbj.renderHtml('box1', options);
+				options.progress = {
+					width: '70%', //进度条宽度
+					description: '进度条描述' //进度条描述
+				};
+				//渲染box2
+				bbj.renderHtml('box2', options);
+			}(this, jQuery));
+
+			/**
+			 * smallbox
+			 */
+			/*<div class="small-box bg-aqua">
+				<div class="inner">
+					<h3>150</h3>
+					<p>New Orders</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-shopping-cart"></i>
+				</div>
+				<a href="#" class="small-box-footer">
+					More info <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>*/
+			(function(win, $) {
+
+				var options = {
+					type: 'smallbox', //模版名称!!!!!!
+					bgcolorcls: 'bg-aqua', //背景
+					text1: 'text1', //文本1
+					text2: 'text2', //文本2
+					iconcls: 'fa fa-shopping-cart', //图标
+					footer: [] //底部超链接
+				};
+
+				//渲染box3
+				bbj.renderHtml('box3', options);
+				options.footer = [{
+					url: 'https://www.baidu.com/', //地址
+					text: 'More info1 ', //值
+					iconcls: 'fa fa-arrow-circle-right' //小图标
+				}, {
+					url: '#',
+					text: 'More info2 ',
+					iconcls: 'fa fa-shopping-cart'
+				}];
+				//渲染box4
+				bbj.renderHtml('box4', options);
+			}(this, jQuery));
+
+			/**
+			 * panelbox
+			 */
+			/*<div class="box box-default collapsed-box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">Expandable</h3>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse">
+							<i class="fa fa-plus"></i>
+                		</button>
+						<button type="button" class="btn btn-box-tool" data-widget="remove">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					The body of the box
+				</div>
+				<div class="overlay">
+					<i class="fa fa-refresh fa-spin"></i>
+				</div>
+			</div>*/
+			(function(win, $) {
+
+				var options = {
+					type: 'panelbox', //模版名称!!!!!!
+					state: 'default', //状态：default，danger，success，warning
+					boxsolid: '', //标题栏是否有颜色
+					collapsedbox: '', //展开内容面板，''、'collapsed-box'
+					withborder: 'with-border', //标题与内容之间的线,''、'with-border'
+					title: '标题',
+					button: [],
+					body: '内容',
+					overlay: []
+				};
+
+				//渲染box5
+				bbj.renderHtml('box5', options);
+				//渲染box6
+				options.state = 'success';
+				options.boxsolid = 'box-solid';
+				options.collapsedbox = 'collapsed-box'; //建议设置按钮为‘+’时使用
+				options.button = [{
+					datawidget: 'collapse',
+					iconcls: 'fa fa-plus'
+				}, {
+					datawidget: 'remove',
+					iconcls: 'fa fa-times'
+				}];
+
+				bbj.renderHtml('box6', options);
+
+				//渲染box7
+				options.collapsedbox = '';
+				options.button = [];
+				options.overlay = [{}];
+				bbj.renderHtml('box7', options);
+
+			}(this, jQuery));
+			
+			/**
+			 * charbox
+			 */
+			/*<div class="box box-primary direct-chat direct-chat-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Direct Chat</h3>
+					<div class="box-tools pull-right">
+						<span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
+						<button type="button" class="btn btn-box-tool" data-widget="collapse">
+							<i class="fa fa-minus"></i>
+                		</button>
+						<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
+                  			<i class="fa fa-comments"></i>
+						</button>
+						<button type="button" class="btn btn-box-tool" data-widget="remove">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<div class="direct-chat-messages">
+						<div class="direct-chat-msg">
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-name pull-left">Alexander Pierce</span>
+								<span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+							</div>
+							<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="Message User Image">
+							<div class="direct-chat-text">
+								Is this template really for free? That's unbelievable!
+							</div>
+						</div>
+						<div class="direct-chat-msg right">
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-name pull-right">Sarah Bullock</span>
+								<span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+							</div>
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image">
+							<div class="direct-chat-text">
+								You better believe it!
+							</div>
+						</div>
+					</div>
+					<div class="direct-chat-contacts">
+						<ul class="contacts-list">
+							<li>
+								<a href="#">
+									<img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="User Image">
+									<div class="contacts-list-info">
+										<span class="contacts-list-name">
+                              				Count Dracula
+                              				<small class="contacts-list-date pull-right">2/28/2015</small>
+                            			</span>
+										<span class="contacts-list-msg">How have you been? I was...</span>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="box-footer">
+					<form action="#" method="post">
+						<div class="input-group">
+							<input type="text" name="message" placeholder="Type Message ..." class="form-control">
+							<span class="input-group-btn">
+                        		<button type="submit" class="btn btn-primary btn-flat">Send</button>
+                      		</span>
+						</div>
+					</form>
+				</div>
+			</div>*/
+		</script>
 </body>
 
 </html>
