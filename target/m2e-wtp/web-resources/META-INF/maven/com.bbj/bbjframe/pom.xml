@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.bbj</groupId>
+	<artifactId>bbjframe</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<bbj-base-version>0.0.1-SNAPSHOT</bbj-base-version>
+
+		<!-- java version -->
+		<source-version>1.8</source-version>
+		<target-version>1.8</target-version>
+
+		<!-- maven plugin version for this project -->
+		<maven-compiler-plugin-version>3.2</maven-compiler-plugin-version>
+		<maven-jar-plugin-version>2.4</maven-jar-plugin-version>
+		<maven-resources-plugin-version>2.6</maven-resources-plugin-version>
+		<maven-source-plugin-version>2.2.1</maven-source-plugin-version>
+		<exec-maven-plugin-version>1.2.1</exec-maven-plugin-version>
+		<tomcat7-maven-plugin-version>2.2</tomcat7-maven-plugin-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.bbj</groupId>
+			<artifactId>bbj-base-bizlogic</artifactId>
+			<version>${bbj-base-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bbj</groupId>
+			<artifactId>bbj-base-controller</artifactId>
+			<version>${bbj-base-version}</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>com.bbj</groupId>
+			<artifactId>bbj-base-test</artifactId>
+			<version>${bbj-base-version}</version>
+		</dependency> -->
+
+	</dependencies>
+
+	<build>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+
+			<!--指定编译版本 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin-version}</version>
+				<configuration>
+					<source>${source-version}</source>
+					<target>${target-version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- Tomcat运行插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<path>/${project.artifactId}</path>
+					<port>8088</port>
+					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
+					<url>http://localhost:8088/</url>
+					<server>tomcat7</server>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<!-- 过滤后缀为pem、pfx的证书文件 -->
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>so</nonFilteredFileExtension>
+						<nonFilteredFileExtension>dll</nonFilteredFileExtension>
+						<nonFilteredFileExtension>store</nonFilteredFileExtension>
+						<nonFilteredFileExtension>lic</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+
+			<!-- jrebel的文件生成路径 -->
+			<plugin>
+				<groupId>org.zeroturnaround</groupId>
+				<artifactId>jrebel-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-rebel-xml</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<rebelXmlDirectory>${basedir}/src/main/resources</rebelXmlDirectory>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
